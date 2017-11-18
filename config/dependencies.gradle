@@ -19,6 +19,9 @@ ext {
   rxJavaVersion = '1.2.7'
   rxAndroidVersion = '1.2.1'
   daggerVersion = '2.8'
+  retrofitVersion = '2.2.0'
+  okHttpVersion = '3.6.0'
+  gsonVersion = '2.8.0'
 
   //Testing
   jUnitVersion = '4.12'
@@ -27,14 +30,18 @@ ext {
   mockitoVersion = '1.9.5'
   mockitoAndroidVersion = '2.6.2'
 
-  dependencies = [support         : "com.android.support:appcompat-v7:${supportVersion}",
-                  constraintLayout: "com.android.support.constraint:constraint-layout:${constraintVersion}",
-                  rxJava          : "io.reactivex:rxjava:${rxJavaVersion}",
-                  rxAndroid       : "io.reactivex:rxandroid:${rxAndroidVersion}",
-                  daggerCompiler  : "com.google.dagger:dagger-compiler:${daggerVersion}",
-                  dagger          : "com.google.dagger:dagger:${daggerVersion}",
-
-  ]
+  dependencies = [support           : "com.android.support:appcompat-v7:${supportVersion}",
+                  constraintLayout  : "com.android.support.constraint:constraint-layout:${constraintVersion}",
+                  rxJava            : "io.reactivex:rxjava:${rxJavaVersion}",
+                  rxAndroid         : "io.reactivex:rxandroid:${rxAndroidVersion}",
+                  daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                  dagger            : "com.google.dagger:dagger:${daggerVersion}",
+                  retrofit          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+                  gsonConverter     : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+                  rxJavaAdapter     : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+                  loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+                  okHttp            : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+                  gson              : "com.google.code.gson:gson:${gsonVersion}"]
 
   testDependencies = [junit         : "junit:junit:${jUnitVersion}",
                       testRunner    : "com.android.support.test:runner:${testRunnerVersion}",
