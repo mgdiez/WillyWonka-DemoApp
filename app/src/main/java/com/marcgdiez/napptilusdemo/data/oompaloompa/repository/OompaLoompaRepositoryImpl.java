@@ -23,9 +23,8 @@ public class OompaLoompaRepositoryImpl implements OompaLoompaRepository {
   }
 
   @Override public Observable<OompaLoompaPage> getOompaLoompas(int page) {
-    //return Observable.concat(requestLocalPage(page),
-    //    requestNetworkPage(page).doOnNext(this::persistOompasPage)).first();
-    return requestNetworkPage(1);
+    return Observable.concat(requestLocalPage(page),
+        requestNetworkPage(page).doOnNext(this::persistOompasPage)).first();
   }
 
   private void persistOompasPage(OompaLoompaPage response) {

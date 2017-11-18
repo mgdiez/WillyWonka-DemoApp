@@ -49,7 +49,10 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
       }
 
       @Override protected void onError(String errorMessage) {
-        view.showErrorMessage(errorMessage);
+        List<OompaLoompa> oompaLoompas = storyController.getStoryState().getOompaLoompas();
+        if (oompaLoompas == null || oompaLoompas.isEmpty()) {
+          view.showErrorMessage(errorMessage);
+        }
       }
     });
   }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Napptilus Demo</string>
+  <string name="error_message">Oops! Something went wrong at Willy Wonka\'s HQ :(</string>
 </resources>
