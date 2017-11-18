@@ -1,5 +1,6 @@
 package com.marcgdiez.napptilusdemo.app.list.usecase;
 
+import com.marcgdiez.napptilusdemo.app.list.fragment.exception.OompaLoompasNotFoundException;
 import com.marcgdiez.napptilusdemo.core.executor.MainThread;
 import com.marcgdiez.napptilusdemo.core.interactor.Interactor;
 import com.marcgdiez.napptilusdemo.data.oompaloompa.repository.OompaLoompaRepository;
@@ -17,6 +18,11 @@ public class GetOompasLoompasUseCase extends Interactor<OompaLoompaPage> {
   @Inject public GetOompasLoompasUseCase(Executor executor, MainThread mainThread,
       OompaLoompaRepository oompaLoompaRepository) {
     super(executor, mainThread);
+
+    if (oompaLoompaRepository == null) {
+      throw new IllegalArgumentException("GetOompasLoompasUseCase must have valid parameters");
+    }
+
     this.oompaLoompaRepository = oompaLoompaRepository;
   }
 
@@ -26,6 +32,7 @@ public class GetOompasLoompasUseCase extends Interactor<OompaLoompaPage> {
   }
 
   @Override protected Observable<OompaLoompaPage> buildObservable() {
-    return oompaLoompaRepository.getOompaLoompas(page);
+    return oompaLoompaRepository.getOompaLoompas(page)
+        .switchIfEmpty(Observable.error(new OompaLoompasNotFoundException()));
   }
 }
