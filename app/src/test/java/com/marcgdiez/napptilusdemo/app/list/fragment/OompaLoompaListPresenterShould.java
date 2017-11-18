@@ -102,6 +102,7 @@ public class OompaLoompaListPresenterShould {
 
   @Test public void show_error_feedback_if_needed() {
     when(mockStoryController.hasState()).thenReturn(false);
+    when(mockStoryController.getStoryState()).thenReturn(new OompaLoompasState());
 
     doAnswer(invocation -> {
       ((Subscriber) invocation.getArguments()[1]).onError(new Throwable("errorMessage"));
