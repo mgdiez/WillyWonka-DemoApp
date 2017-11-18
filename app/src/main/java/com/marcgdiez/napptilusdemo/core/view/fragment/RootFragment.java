@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import butterknife.ButterKnife;
 import com.marcgdiez.napptilusdemo.core.di.HasComponent;
 import com.marcgdiez.napptilusdemo.core.presenter.Presenter;
 import com.marcgdiez.napptilusdemo.core.story.StoryController;
@@ -26,7 +27,9 @@ public abstract class RootFragment extends Fragment {
       throw new IllegalArgumentException("Fragment must have a valid layout resource Id");
     }
 
-    return inflater.inflate(fragmentLayoutResourceId, container, false);
+    View view = inflater.inflate(fragmentLayoutResourceId, container, false);
+    ButterKnife.bind(this, view);
+    return view;
   }
 
   protected abstract void initializePresenter();

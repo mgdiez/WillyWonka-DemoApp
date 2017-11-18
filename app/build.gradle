@@ -38,6 +38,8 @@ dependencies {
   implementation dependencies.rxAndroid
   annotationProcessor dependencies.daggerCompiler
   implementation dependencies.dagger
+  implementation dependencies.recyclerView
+  implementation dependencies.picasso
 
   //Retrofit dependencies
   implementation dependencies.retrofit
@@ -46,6 +48,9 @@ dependencies {
   implementation dependencies.loggingInterceptor
   implementation dependencies.gson
   implementation dependencies.okHttp
+
+  implementation dependencies.butterKnife
+  annotationProcessor dependencies.butterKnifeCompiler
 
   androidTestImplementation testDependencies.testRunner
   androidTestImplementation testDependencies.espresso
