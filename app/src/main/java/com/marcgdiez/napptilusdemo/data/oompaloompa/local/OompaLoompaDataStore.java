@@ -1,11 +1,10 @@
 package com.marcgdiez.napptilusdemo.data.oompaloompa.local;
 
-import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
-import java.util.List;
+import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;
 import rx.Observable;
 
 public interface OompaLoompaDataStore {
-  Observable<List<OompaLoompa>> getOompaLoompas(int page);
+  Observable<OompaLoompaPage> getOompaLoompas(int page);
 
-  void persistOompas(List<OompaLoompa> response);
+  void persistOompas(OompaLoompaPage response);
 }

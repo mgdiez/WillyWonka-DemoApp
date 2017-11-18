@@ -1,6 +1,6 @@
 package com.marcgdiez.napptilusdemo.data.oompaloompa.dto;
 
-class OompaLoompaDto {
+public class OompaLoompaDto {
 
   private String first_name;
   private String last_name;

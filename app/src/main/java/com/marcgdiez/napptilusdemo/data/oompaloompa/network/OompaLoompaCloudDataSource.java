@@ -5,6 +5,7 @@ import com.marcgdiez.napptilusdemo.data.DtoMapper;
 import com.marcgdiez.napptilusdemo.data.oompaloompa.OompaLoompasApi;
 import com.marcgdiez.napptilusdemo.data.oompaloompa.dto.OompaLoompaListResponseDto;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
+import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;
 import java.util.List;
 import javax.inject.Inject;
 import rx.Observable;
@@ -20,11 +21,11 @@ public class OompaLoompaCloudDataSource implements OompaLoompaDataSource {
     this.dtoMapper = dtoMapper;
   }
 
-  @Override public Observable<List<OompaLoompa>> getOompaLoompas(int page) {
+  @Override public Observable<OompaLoompaPage> getOompaLoompas(int page) {
     return oompaLoompasApi.getOompaLoompasByPage(page).map(toEntity());
   }
 
-  @NonNull private Func1<OompaLoompaListResponseDto, List<OompaLoompa>> toEntity() {
+  @NonNull private Func1<OompaLoompaListResponseDto, OompaLoompaPage> toEntity() {
     return dtoMapper::mapOompaLoompaListResponse;
   }
 }
