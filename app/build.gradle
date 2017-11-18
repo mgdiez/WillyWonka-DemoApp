@@ -38,4 +38,5 @@ dependencies {
   androidTestImplementation testDependencies.testRunner
   androidTestImplementation testDependencies.espresso
   testImplementation testDependencies.junit
+  testImplementation testDependencies.mockito
 }
