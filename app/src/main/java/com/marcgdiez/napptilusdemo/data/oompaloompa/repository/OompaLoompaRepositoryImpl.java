@@ -23,7 +23,21 @@ public class OompaLoompaRepositoryImpl implements OompaLoompaRepository {
     this.dataSource = dataSource;
   }
 
-  @Override public Observable<List<OompaLoompa>> getOompaLoompas(int count) {
-    return null;
+  @Override public Observable<List<OompaLoompa>> getOompaLoompas(int page) {
+    //return Observable.concat(requestLocalPage(page),
+    //    requestNetworkPage(page).doOnNext(this::persistOompasPage)).first();
+    return requestNetworkPage(1);
+  }
+
+  private void persistOompasPage(List<OompaLoompa> response) {
+    dataStore.persistOompas(response);
+  }
+
+  private Observable<List<OompaLoompa>> requestNetworkPage(int page) {
+    return dataSource.getOompaLoompas(page);
+  }
+
+  private Observable<List<OompaLoompa>> requestLocalPage(int page) {
+    return dataStore.getOompaLoompas(page);
   }
 }

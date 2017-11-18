@@ -6,5 +6,5 @@ import rx.Observable;
 
 public interface OompaLoompaRepository {
 
-  Observable<List<OompaLoompa>> getOompaLoompas(int count);
+  Observable<List<OompaLoompa>> getOompaLoompas(int page);
 }
