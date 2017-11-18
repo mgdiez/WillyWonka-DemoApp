@@ -12,4 +12,16 @@ public class OompaLoompaPage {
     this.totalPages = totalPages;
     this.oompaLoompas = oompaLoompas;
   }
+
+  public int getPageNumber() {
+    return pageNumber;
+  }
+
+  public int getTotalPages() {
+    return totalPages;
+  }
+
+  public List<OompaLoompa> getOompaLoompas() {
+    return oompaLoompas;
+  }
 }
