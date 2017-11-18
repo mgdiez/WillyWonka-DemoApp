@@ -16,6 +16,9 @@ ext {
   //Libraries
   supportVersion = '27.0.1'
   constraintVersion = '1.0.2'
+  rxJavaVersion = '1.2.7'
+  rxAndroidVersion = '1.2.1'
+  daggerVersion = '2.8'
 
   //Testing
   jUnitVersion = '4.12'
@@ -23,9 +26,15 @@ ext {
   espressoVersion = '3.0.1'
 
   dependencies = [support         : "com.android.support:appcompat-v7:${supportVersion}",
-                  constraintLayout: "com.android.support.constraint:constraint-layout:${constraintVersion}"]
+                  constraintLayout: "com.android.support.constraint:constraint-layout:${constraintVersion}",
+                  rxJava          : "io.reactivex:rxjava:${rxJavaVersion}",
+                  rxAndroid       : "io.reactivex:rxandroid:${rxAndroidVersion}",
+                  daggerCompiler  : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                  dagger          : "com.google.dagger:dagger:${daggerVersion}",
 
-  testDependencies = [junit: "junit:junit:${jUnitVersion}",
-  testRunner: "com.android.support.test:runner:${testRunnerVersion}",
-  espresso: "com.android.support.test.espresso:espresso-core:${espressoVersion}"]
+  ]
+
+  testDependencies = [junit     : "junit:junit:${jUnitVersion}",
+                      testRunner: "com.android.support.test:runner:${testRunnerVersion}",
+                      espresso  : "com.android.support.test.espresso:espresso-core:${espressoVersion}"]
 }

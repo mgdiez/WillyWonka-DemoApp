@@ -30,6 +30,10 @@ dependencies {
 
   implementation dependencies.support
   implementation dependencies.constraintLayout
+  implementation dependencies.rxJava
+  implementation dependencies.rxAndroid
+  annotationProcessor dependencies.daggerCompiler
+  implementation dependencies.dagger
 
   androidTestImplementation testDependencies.testRunner
   androidTestImplementation testDependencies.espresso
