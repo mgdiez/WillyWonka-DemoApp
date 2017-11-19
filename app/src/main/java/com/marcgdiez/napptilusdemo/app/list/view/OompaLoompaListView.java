@@ -1,4 +1,4 @@
-package com.marcgdiez.napptilusdemo.app.list.fragment.view;
+package com.marcgdiez.napptilusdemo.app.list.view;
 
 import com.marcgdiez.napptilusdemo.core.view.IView;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompa;

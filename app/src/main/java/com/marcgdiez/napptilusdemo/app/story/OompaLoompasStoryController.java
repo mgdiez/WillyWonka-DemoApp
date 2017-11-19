@@ -1,4 +1,4 @@
-package com.marcgdiez.napptilusdemo.app.list.story;
+package com.marcgdiez.napptilusdemo.app.story;
 
 import android.support.v7.app.AppCompatActivity;
 import com.marcgdiez.napptilusdemo.app.list.fragment.OompaLoompaListFragment;

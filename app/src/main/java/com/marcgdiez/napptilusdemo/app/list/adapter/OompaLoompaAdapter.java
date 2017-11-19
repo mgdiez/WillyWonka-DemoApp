@@ -1,4 +1,4 @@
-package com.marcgdiez.napptilusdemo.app.list.fragment.adapter;
+package com.marcgdiez.napptilusdemo.app.list.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

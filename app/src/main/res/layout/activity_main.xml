@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.marcgdiez.napptilusdemo.app.list.activity.OompaLoompasActivity"
+    tools:context=".app.activity.OompaLoompasActivity"
     >
 
   <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

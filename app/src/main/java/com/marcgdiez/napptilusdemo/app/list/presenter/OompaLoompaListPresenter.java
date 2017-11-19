@@ -1,9 +1,9 @@
-package com.marcgdiez.napptilusdemo.app.list.fragment;
+package com.marcgdiez.napptilusdemo.app.list.presenter;
 
 import android.support.annotation.VisibleForTesting;
-import com.marcgdiez.napptilusdemo.app.list.fragment.view.OompaLoompaListView;
-import com.marcgdiez.napptilusdemo.app.list.story.OompaLoompasState;
-import com.marcgdiez.napptilusdemo.app.list.story.OompaLoompasStoryController;
+import com.marcgdiez.napptilusdemo.app.list.view.OompaLoompaListView;
+import com.marcgdiez.napptilusdemo.app.story.OompaLoompasState;
+import com.marcgdiez.napptilusdemo.app.story.OompaLoompasStoryController;
 import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.core.interactor.Interactor;
 import com.marcgdiez.napptilusdemo.core.presenter.Presenter;

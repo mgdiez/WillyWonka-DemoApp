@@ -1,6 +1,6 @@
 package com.marcgdiez.napptilusdemo.app.list.usecase;
 
-import com.marcgdiez.napptilusdemo.app.list.fragment.exception.OompaLoompasNotFoundException;
+import com.marcgdiez.napptilusdemo.app.list.exception.OompaLoompasNotFoundException;
 import com.marcgdiez.napptilusdemo.core.executor.MainThread;
 import com.marcgdiez.napptilusdemo.data.oompaloompa.repository.OompaLoompaRepository;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;

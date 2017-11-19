@@ -1,4 +1,4 @@
-package com.marcgdiez.napptilusdemo.app.list.story;
+package com.marcgdiez.napptilusdemo.app.story;
 
 import android.os.Parcel;
 import com.marcgdiez.napptilusdemo.core.story.StoryState;
