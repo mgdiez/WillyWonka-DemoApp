@@ -69,6 +69,20 @@ public class OompaLoompaListFragment extends RootFragment implements OompaLoompa
     }
   }
 
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.male:
+        item.setChecked(!item.isChecked());
+        presenter.onMaleChecked();
+        return true;
+      case R.id.female:
+        item.setChecked(!item.isChecked());
+        presenter.onFemaleChecked();
+      default:
+        return false;
+    }
+  }
+
   @Override protected void initializeView(View view) {
     setHasOptionsMenu(true);
     if (getActivity() != null) {

@@ -15,4 +15,6 @@ public interface OompaLoompaDataStore {
   void persistOompa(OompaLoompa oompaLoompa);
 
   Observable<List<OompaLoompa>> getOompaLoompasByQuery(String query);
+
+  Observable<List<OompaLoompa>> getOompaLoompasByGender(String gender);
 }

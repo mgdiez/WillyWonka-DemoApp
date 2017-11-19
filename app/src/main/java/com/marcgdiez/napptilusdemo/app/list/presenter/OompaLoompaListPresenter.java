@@ -2,6 +2,7 @@ package com.marcgdiez.napptilusdemo.app.list.presenter;
 
 import android.support.annotation.VisibleForTesting;
 import android.widget.ImageView;
+import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompaLoompasByGenderUseCase;
 import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompaLoompasByQueryUseCase;
 import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.app.list.view.OompaLoompaListView;
@@ -20,14 +21,21 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
   private final OompaLoompasStoryController storyController;
   private final GetOompasLoompasUseCase getOompaLoompasUseCase;
   private final GetOompaLoompasByQueryUseCase getOompaLoompasByQueryUseCase;
+  private final GetOompaLoompasByGenderUseCase getOompaLoompasByGenderUseCase;
+
+  private boolean maleFilter = true;
+  private boolean femaleFilter = true;
 
   @Inject public OompaLoompaListPresenter(Interactor<OompaLoompaPage> getOompaLoompasUseCase,
       Interactor<List<OompaLoompa>> getOompaLoompasByQueryUseCase,
+      Interactor<List<OompaLoompa>> getOompaLoompasByGenderUseCase,
       OompaLoompasStoryController storyController) {
 
     this.getOompaLoompasUseCase = (GetOompasLoompasUseCase) getOompaLoompasUseCase;
     this.getOompaLoompasByQueryUseCase =
         (GetOompaLoompasByQueryUseCase) getOompaLoompasByQueryUseCase;
+    this.getOompaLoompasByGenderUseCase =
+        (GetOompaLoompasByGenderUseCase) getOompaLoompasByGenderUseCase;
     this.storyController = storyController;
   }
 
@@ -69,7 +77,7 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
   }
 
   public void onBottomReached() {
-    if (canRequestMoreOompas()) {
+    if (canRequestMoreOompas() && isNotFiltering()) {
       getOompaLoompas(storyController.getStoryState().getPage() + 1);
     }
   }
@@ -95,5 +103,43 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
         view.showNoResults();
       }
     });
+  }
+
+  public void onMaleChecked() {
+    maleFilter = !maleFilter;
+    updateList();
+  }
+
+  public void onFemaleChecked() {
+    femaleFilter = !femaleFilter;
+    updateList();
+  }
+
+  private void updateList() {
+    boolean shouldSearch = femaleFilter != maleFilter;
+    if (!shouldSearch) {
+      view.setNewItems(storyController.getStoryState().getOompaLoompas());
+    } else {
+      String gender;
+      if (femaleFilter) {
+        gender = OompaLoompa.FEMALE;
+      } else {
+        gender = OompaLoompa.MALE;
+      }
+      getOompaLoompasByGenderUseCase.execute(gender, new DefaultSubscriber<List<OompaLoompa>>() {
+        @Override public void onNext(List<OompaLoompa> oompaLoompas) {
+          super.onNext(oompaLoompas);
+          view.setNewItems(oompaLoompas);
+        }
+
+        @Override protected void onError(String errorMessage) {
+
+        }
+      });
+    }
+  }
+
+  private boolean isNotFiltering() {
+    return femaleFilter == maleFilter;
   }
 }

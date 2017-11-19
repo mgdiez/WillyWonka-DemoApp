@@ -12,4 +12,6 @@ public interface OompaLoompaRepository {
   Observable<OompaLoompa> getOompaLoompa(int id);
 
   Observable<List<OompaLoompa>> getOompaLoompasByQuery(String query);
+
+  Observable<List<OompaLoompa>> getOompaLoompasByGender(String gender);
 }
