@@ -9,10 +9,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import com.marcgdiez.napptilusdemo.R;
 import com.marcgdiez.napptilusdemo.app.di.component.OompaLoompasComponent;
-import com.marcgdiez.napptilusdemo.app.list.presenter.OompaLoompaListPresenter;
 import com.marcgdiez.napptilusdemo.app.list.adapter.OompaLoompaAdapter;
 import com.marcgdiez.napptilusdemo.app.list.di.component.OompaLoompaListComponent;
 import com.marcgdiez.napptilusdemo.app.list.di.module.OompaLoompaListModule;
+import com.marcgdiez.napptilusdemo.app.list.presenter.OompaLoompaListPresenter;
 import com.marcgdiez.napptilusdemo.app.list.view.OompaLoompaListView;
 import com.marcgdiez.napptilusdemo.app.story.OompaLoompasStoryController;
 import com.marcgdiez.napptilusdemo.core.presenter.Presenter;
@@ -44,6 +44,8 @@ public class OompaLoompaListFragment extends RootFragment implements OompaLoompa
   }
 
   @Override protected void initializeView(View view) {
+    adapter.addOnOompaSelectedListener(
+        (oompaLoompa, image) -> presenter.onOompaSelected(oompaLoompa, image));
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setHasFixedSize(true);
     recyclerView.setAdapter(adapter);
@@ -63,6 +65,11 @@ public class OompaLoompaListFragment extends RootFragment implements OompaLoompa
             new OompaLoompaListModule());
 
     oompaLoompaListComponent.inject(this);
+  }
+
+  @Override public void onDestroy() {
+    super.onDestroy();
+    adapter.removeOnOompaSelectedListener();
   }
 
   @Override protected StoryController getStoryController() {

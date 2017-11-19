@@ -1,10 +1,11 @@
 package com.marcgdiez.napptilusdemo.app.list.presenter;
 
 import android.support.annotation.VisibleForTesting;
+import android.widget.ImageView;
+import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.app.list.view.OompaLoompaListView;
 import com.marcgdiez.napptilusdemo.app.story.OompaLoompasState;
 import com.marcgdiez.napptilusdemo.app.story.OompaLoompasStoryController;
-import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.core.interactor.Interactor;
 import com.marcgdiez.napptilusdemo.core.presenter.Presenter;
 import com.marcgdiez.napptilusdemo.core.subscriber.DefaultSubscriber;
@@ -70,5 +71,10 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
   @VisibleForTesting public boolean canRequestMoreOompas() {
     OompaLoompasState storyState = storyController.getStoryState();
     return storyState.getPage() < storyState.getTotalPages();
+  }
+
+  public void onOompaSelected(OompaLoompa oompaLoompa, ImageView image) {
+    storyController.getStoryState().setSelectedOompa(oompaLoompa);
+    storyController.navigateToDetail(image);
   }
 }

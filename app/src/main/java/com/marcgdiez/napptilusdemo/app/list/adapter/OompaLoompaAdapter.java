@@ -1,6 +1,7 @@
 package com.marcgdiez.napptilusdemo.app.list.adapter;
 
 import android.content.Context;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.internal.DebouncingOnClickListener;
 import com.marcgdiez.napptilusdemo.R;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
 import com.squareup.picasso.Picasso;
@@ -20,6 +22,8 @@ public class OompaLoompaAdapter
     extends RecyclerView.Adapter<OompaLoompaAdapter.OompaLoompaViewHolder> {
 
   private List<OompaLoompa> items;
+  private OnOompaSelectedListener listener;
+  private final String FEMALE = "F";
 
   @Inject public OompaLoompaAdapter() {
     items = new ArrayList<>();
@@ -53,8 +57,15 @@ public class OompaLoompaAdapter
         .into(holder.image);
     holder.profession.setText(oompaLoompa.getProfession());
     int drawable =
-        oompaLoompa.getGender().equals("F") ? R.drawable.gender_female : R.drawable.gender_male;
+        oompaLoompa.getGender().equals(FEMALE) ? R.drawable.gender_female : R.drawable.gender_male;
     holder.gender.setImageDrawable(context.getResources().getDrawable(drawable));
+
+    ViewCompat.setTransitionName(holder.image, oompaLoompa.getName());
+    holder.itemView.setOnClickListener(new DebouncingOnClickListener() {
+      @Override public void doClick(View v) {
+        listener.onOompaSelected(oompaLoompa, holder.image);
+      }
+    });
   }
 
   @Override public int getItemCount() {
@@ -72,5 +83,17 @@ public class OompaLoompaAdapter
       super(itemView);
       ButterKnife.bind(this, itemView);
     }
+  }
+
+  public void addOnOompaSelectedListener(OnOompaSelectedListener listener) {
+    this.listener = listener;
+  }
+
+  public void removeOnOompaSelectedListener() {
+    listener = null;
+  }
+
+  public interface OnOompaSelectedListener {
+    void onOompaSelected(OompaLoompa oompaLoompa, ImageView image);
   }
 }

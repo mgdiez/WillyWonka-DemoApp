@@ -10,6 +10,7 @@ public class OompaLoompasState implements StoryState {
   private List<OompaLoompa> oompaLoompas;
   private int page;
   private int totalPages;
+  private OompaLoompa selectedOompa;
 
   @Override public boolean isValid() {
     return oompaLoompas != null && !oompaLoompas.isEmpty();
@@ -76,4 +77,12 @@ public class OompaLoompasState implements StoryState {
       return new OompaLoompasState[size];
     }
   };
+
+  public OompaLoompa getSelectedOompa() {
+    return selectedOompa;
+  }
+
+  public void setSelectedOompa(OompaLoompa selectedOompa) {
+    this.selectedOompa = selectedOompa;
+  }
 }

@@ -7,7 +7,9 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 
 /**
  * Created by Marc on 18/11/2017.
@@ -76,6 +78,15 @@ public abstract class BaseStoryController<S extends StoryState> {
     fragmentTransaction.replace(containerId, fragment, fragmentName);
     fragmentTransaction.addToBackStack(fragmentName);
     fragmentTransaction.commit();
+  }
+
+  protected void replaceFragmentWithSharedImage(ImageView image, int containerId, Fragment fragment) {
+    String fragmentName = fragment.getClass().getSimpleName();
+    fragmentManager.beginTransaction()
+        .addSharedElement(image, ViewCompat.getTransitionName(image))
+        .addToBackStack(fragmentName)
+        .replace(containerId, fragment)
+        .commit();
   }
 
   protected boolean popBackStackTo(String name) {
