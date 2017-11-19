@@ -45,7 +45,7 @@ public class VoMapper {
       for (OompaLoompaVo oompaLoompaVo : oompaLoompaPageVo.getOompaLoompas()) {
         OompaLoompa oompaLoompa = new OompaLoompa(oompaLoompaVo.getId(), oompaLoompaVo.getName(),
             oompaLoompaVo.getGender(), oompaLoompaVo.getImage(), oompaLoompaVo.getProfession(),
-            oompaLoompaVo.getEmail());
+            oompaLoompaVo.getEmail(), oompaLoompaVo.getDescription());
 
         oompaLoompas.add(oompaLoompa);
       }
@@ -54,5 +54,31 @@ public class VoMapper {
               oompaLoompas);
     }
     return entity;
+  }
+
+  public OompaLoompa toEntity(OompaLoompaVo oompaLoompaVo) {
+    OompaLoompa oompaLoompa = null;
+    if (oompaLoompaVo != null) {
+      oompaLoompa =
+          new OompaLoompa(oompaLoompaVo.getId(), oompaLoompaVo.getName(), oompaLoompaVo.getGender(),
+              oompaLoompaVo.getImage(), oompaLoompaVo.getProfession(), oompaLoompaVo.getEmail(),
+              oompaLoompaVo.getDescription());
+    }
+    return oompaLoompa;
+  }
+
+  public OompaLoompaVo toValue(OompaLoompa oompaLoompa) {
+    OompaLoompaVo vo = null;
+    if (oompaLoompa != null) {
+      vo = new OompaLoompaVo();
+      vo.setId(oompaLoompa.getId());
+      vo.setName(oompaLoompa.getName());
+      vo.setGender(oompaLoompa.getGender());
+      vo.setImage(oompaLoompa.getImage());
+      vo.setProfession(oompaLoompa.getProfession());
+      vo.setEmail(oompaLoompa.getEmail());
+      vo.setDescription(oompaLoompa.getDescription());
+    }
+    return vo;
   }
 }

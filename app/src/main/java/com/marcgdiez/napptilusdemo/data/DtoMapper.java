@@ -26,7 +26,8 @@ public class DtoMapper {
         for (OompaLoompaDto dto : results) {
           OompaLoompa oompaLoompa =
               new OompaLoompa(dto.getId(), dto.getFirst_name() + " " + dto.getLast_name(),
-                  dto.getGender(), dto.getImage(), dto.getProfession(), dto.getEmail());
+                  dto.getGender(), dto.getImage(), dto.getProfession(), dto.getEmail(),
+                  dto.getDescription());
           oompaLoompas.add(oompaLoompa);
         }
       }
@@ -34,5 +35,16 @@ public class DtoMapper {
           oompaLoompaListResponseDto.getTotal(), oompaLoompas);
     }
     return oompaLoompaPage;
+  }
+
+  public OompaLoompa mapOompaLoompaResponse(OompaLoompaDto oompaLoompaDto) {
+    OompaLoompa oompaLoompa = null;
+    if (oompaLoompaDto != null) {
+      oompaLoompa = new OompaLoompa(oompaLoompaDto.getId(),
+          oompaLoompaDto.getFirst_name() + " " + oompaLoompaDto.getLast_name(),
+          oompaLoompaDto.getGender(), oompaLoompaDto.getImage(), oompaLoompaDto.getProfession(),
+          oompaLoompaDto.getEmail(), oompaLoompaDto.getDescription());
+    }
+    return oompaLoompa;
   }
 }

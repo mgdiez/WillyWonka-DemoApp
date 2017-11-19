@@ -4,6 +4,8 @@ import com.marcgdiez.napptilusdemo.core.realm.RealmObservable;
 import com.marcgdiez.napptilusdemo.data.CommonLocalDataStore;
 import com.marcgdiez.napptilusdemo.data.VoMapper;
 import com.marcgdiez.napptilusdemo.data.oompaloompa.vo.OompaLoompaPageVo;
+import com.marcgdiez.napptilusdemo.data.oompaloompa.vo.OompaLoompaVo;
+import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;
 import javax.inject.Inject;
 import rx.Observable;
@@ -28,6 +30,17 @@ public class OompaLoompaLocalDataStore extends CommonLocalDataStore
 
   @Override public void persistOompas(OompaLoompaPage response) {
     OompaLoompaPageVo vo = voMapper.toValue(response);
+    saveItem(vo);
+  }
+
+  @Override public Observable<OompaLoompa> getOompaLoompaDetail(int id) {
+    return RealmObservable.just(realm -> realm.where(OompaLoompaVo.class)
+        .equalTo(OompaLoompaVo.PRIMARY_KEY, id)
+        .findFirst()).filter(result -> result != null).map(voMapper::toEntity);
+  }
+
+  @Override public void persistOompa(OompaLoompa oompaLoompa) {
+    OompaLoompaVo vo = voMapper.toValue(oompaLoompa);
     saveItem(vo);
   }
 }
