@@ -4,6 +4,7 @@ public class OompaLoompaDto {
 
   private String first_name;
   private String last_name;
+  private String description;
   private String gender;
   private String image;
   private String profession;
@@ -64,5 +65,13 @@ public class OompaLoompaDto {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 }

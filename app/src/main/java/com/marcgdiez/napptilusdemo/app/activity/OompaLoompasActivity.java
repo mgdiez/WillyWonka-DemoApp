@@ -1,11 +1,13 @@
-package com.marcgdiez.napptilusdemo.app.list.activity;
+package com.marcgdiez.napptilusdemo.app.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.view.MenuItem;
 import com.marcgdiez.napptilusdemo.R;
+import com.marcgdiez.napptilusdemo.app.di.component.OompaLoompasComponent;
 import com.marcgdiez.napptilusdemo.app.di.module.ActivityModule;
-import com.marcgdiez.napptilusdemo.app.list.di.component.OompaLoompasComponent;
-import com.marcgdiez.napptilusdemo.app.list.di.module.OompaLoompasModule;
-import com.marcgdiez.napptilusdemo.app.list.story.OompaLoompasStoryController;
+import com.marcgdiez.napptilusdemo.app.di.module.OompaLoompasModule;
+import com.marcgdiez.napptilusdemo.app.story.OompaLoompasStoryController;
 import com.marcgdiez.napptilusdemo.core.di.HasComponent;
 import com.marcgdiez.napptilusdemo.core.presenter.Presenter;
 import com.marcgdiez.napptilusdemo.core.story.StoryContainer;
@@ -58,5 +60,31 @@ public class OompaLoompasActivity extends RootActivity
 
   @Override public OompaLoompasComponent getComponent() {
     return oompaLoompasComponent;
+  }
+
+  public void hideArrowToolbar() {
+    ActionBar supportActionBar = getSupportActionBar();
+    if (supportActionBar != null) {
+      supportActionBar.setDisplayHomeAsUpEnabled(false);
+      supportActionBar.setDisplayShowHomeEnabled(false);
+    }
+  }
+
+  public void showArrowToolbar() {
+    ActionBar supportActionBar = getSupportActionBar();
+    if (supportActionBar != null) {
+      supportActionBar.setDisplayHomeAsUpEnabled(true);
+      supportActionBar.setDisplayShowHomeEnabled(true);
+    }
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        onBackPressed();
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
+    }
   }
 }

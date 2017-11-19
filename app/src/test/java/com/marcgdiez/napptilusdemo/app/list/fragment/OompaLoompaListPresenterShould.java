@@ -1,8 +1,9 @@
 package com.marcgdiez.napptilusdemo.app.list.fragment;
 
-import com.marcgdiez.napptilusdemo.app.list.fragment.view.OompaLoompaListView;
-import com.marcgdiez.napptilusdemo.app.list.story.OompaLoompasState;
-import com.marcgdiez.napptilusdemo.app.list.story.OompaLoompasStoryController;
+import com.marcgdiez.napptilusdemo.app.list.presenter.OompaLoompaListPresenter;
+import com.marcgdiez.napptilusdemo.app.list.view.OompaLoompaListView;
+import com.marcgdiez.napptilusdemo.app.story.OompaLoompasState;
+import com.marcgdiez.napptilusdemo.app.story.OompaLoompasStoryController;
 import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.core.subscriber.DefaultSubscriber;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompa;

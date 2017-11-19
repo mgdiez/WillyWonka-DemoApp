@@ -1,7 +1,7 @@
-package com.marcgdiez.napptilusdemo.app.list.fragment.di.component;
+package com.marcgdiez.napptilusdemo.app.list.di.component;
 
 import com.marcgdiez.napptilusdemo.app.list.fragment.OompaLoompaListFragment;
-import com.marcgdiez.napptilusdemo.app.list.fragment.di.module.OompaLoompaListModule;
+import com.marcgdiez.napptilusdemo.app.list.di.module.OompaLoompaListModule;
 import com.marcgdiez.napptilusdemo.core.di.PerFragment;
 import dagger.Subcomponent;
 

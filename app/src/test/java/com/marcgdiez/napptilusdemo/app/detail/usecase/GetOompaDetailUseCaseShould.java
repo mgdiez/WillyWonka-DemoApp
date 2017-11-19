@@ -1,9 +1,9 @@
-package com.marcgdiez.napptilusdemo.app.list.usecase;
+package com.marcgdiez.napptilusdemo.app.detail.usecase;
 
 import com.marcgdiez.napptilusdemo.app.list.exception.OompaLoompasNotFoundException;
 import com.marcgdiez.napptilusdemo.core.executor.MainThread;
 import com.marcgdiez.napptilusdemo.data.oompaloompa.repository.OompaLoompaRepository;
-import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;
+import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
 import com.marcgdiez.napptilusdemo.rule.ImmediateSchedulersTestRule;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -19,8 +19,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GetOompasLoompasUseCaseShould {
-
+public class GetOompaDetailUseCaseShould {
   @Rule public ImmediateSchedulersTestRule testRule = new ImmediateSchedulersTestRule();
   @Mock OompaLoompaRepository mockOompaLoompaRepository;
 
@@ -30,7 +29,7 @@ public class GetOompasLoompasUseCaseShould {
 
   @Test(expected = IllegalArgumentException.class)
   public void throw_exception_with_invalid_parameters() {
-    new GetOompasLoompasUseCase(null, null, null);
+    new GetOompaDetailUseCase(null, null, null);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -38,18 +37,18 @@ public class GetOompasLoompasUseCaseShould {
     Executor executor = Executors.newSingleThreadExecutor();
     MainThread mainThread = new MainThread();
 
-    new GetOompasLoompasUseCase(executor, mainThread, null);
+    new GetOompaDetailUseCase(executor, mainThread, null);
   }
 
-  @Test public void should_return_error_if_oompas_are_not_found() {
+  @Test public void should_return_error_if_oompa_is_not_found() {
     Executor executor = Executors.newSingleThreadExecutor();
     MainThread mainThread = new MainThread();
-    TestSubscriber<OompaLoompaPage> testSubscriber = TestSubscriber.create();
+    TestSubscriber<OompaLoompa> testSubscriber = TestSubscriber.create();
 
-    when(mockOompaLoompaRepository.getOompaLoompas(anyInt())).thenReturn(Observable.empty());
+    when(mockOompaLoompaRepository.getOompaLoompa(anyInt())).thenReturn(Observable.empty());
 
-    GetOompasLoompasUseCase useCase =
-        new GetOompasLoompasUseCase(executor, mainThread, mockOompaLoompaRepository);
+    GetOompaDetailUseCase useCase =
+        new GetOompaDetailUseCase(executor, mainThread, mockOompaLoompaRepository);
 
     useCase.execute(1, testSubscriber);
 
@@ -58,17 +57,16 @@ public class GetOompasLoompasUseCaseShould {
     testSubscriber.assertError(OompaLoompasNotFoundException.class);
   }
 
-  @Test public void should_return_data_if_oompas_found() {
+  @Test public void should_return_data_if_oompa_found() {
     Executor executor = Executors.newSingleThreadExecutor();
     MainThread mainThread = new MainThread();
-    TestSubscriber<OompaLoompaPage> testSubscriber = TestSubscriber.create();
-    OompaLoompaPage mockOompaLoompaPage = mock(OompaLoompaPage.class);
+    TestSubscriber<OompaLoompa> testSubscriber = TestSubscriber.create();
+    OompaLoompa mockOompaLoompa = mock(OompaLoompa.class);
 
-    when(mockOompaLoompaRepository.getOompaLoompas(1)).thenReturn(
-        Observable.just(mockOompaLoompaPage));
+    when(mockOompaLoompaRepository.getOompaLoompa(1)).thenReturn(Observable.just(mockOompaLoompa));
 
-    GetOompasLoompasUseCase useCase =
-        new GetOompasLoompasUseCase(executor, mainThread, mockOompaLoompaRepository);
+    GetOompaDetailUseCase useCase =
+        new GetOompaDetailUseCase(executor, mainThread, mockOompaLoompaRepository);
 
     useCase.execute(1, testSubscriber);
 
@@ -76,6 +74,6 @@ public class GetOompasLoompasUseCaseShould {
 
     testSubscriber.assertCompleted();
     testSubscriber.assertNoErrors();
-    testSubscriber.assertValue(mockOompaLoompaPage);
+    testSubscriber.assertValue(mockOompaLoompa);
   }
 }

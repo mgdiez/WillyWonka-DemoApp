@@ -16,7 +16,12 @@ public abstract class RootFragment extends Fragment {
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    initializeTransition();
     initializeInjector();
+  }
+
+  protected void initializeTransition() {
+    //Override if fragment performs a transition.
   }
 
   @Nullable @Override
@@ -28,7 +33,9 @@ public abstract class RootFragment extends Fragment {
     }
 
     View view = inflater.inflate(fragmentLayoutResourceId, container, false);
-    ButterKnife.bind(this, view);
+    if (view != null) {
+      ButterKnife.bind(this, view);
+    }
     return view;
   }
 

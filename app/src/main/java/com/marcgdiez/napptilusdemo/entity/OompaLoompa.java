@@ -10,19 +10,25 @@ public class OompaLoompa implements Parcelable {
   private final String image;
   private final String profession;
   private final String email;
+  private final String description;
 
   public OompaLoompa(int id, String name, String gender, String image, String profession,
-      String email) {
+      String email, String description) {
     this.id = id;
     this.name = name;
     this.gender = gender;
     this.image = image;
     this.profession = profession;
     this.email = email;
+    this.description = description;
   }
 
   public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -45,6 +51,10 @@ public class OompaLoompa implements Parcelable {
     return email;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
   @Override public int describeContents() {
     return 0;
   }
@@ -56,6 +66,7 @@ public class OompaLoompa implements Parcelable {
     dest.writeString(this.image);
     dest.writeString(this.profession);
     dest.writeString(this.email);
+    dest.writeString(this.description);
   }
 
   protected OompaLoompa(Parcel in) {
@@ -65,16 +76,16 @@ public class OompaLoompa implements Parcelable {
     this.image = in.readString();
     this.profession = in.readString();
     this.email = in.readString();
+    this.description = in.readString();
   }
 
-  public static final Parcelable.Creator<OompaLoompa> CREATOR =
-      new Parcelable.Creator<OompaLoompa>() {
-        @Override public OompaLoompa createFromParcel(Parcel source) {
-          return new OompaLoompa(source);
-        }
+  public static final Creator<OompaLoompa> CREATOR = new Creator<OompaLoompa>() {
+    @Override public OompaLoompa createFromParcel(Parcel source) {
+      return new OompaLoompa(source);
+    }
 
-        @Override public OompaLoompa[] newArray(int size) {
-          return new OompaLoompa[size];
-        }
-      };
+    @Override public OompaLoompa[] newArray(int size) {
+      return new OompaLoompa[size];
+    }
+  };
 }

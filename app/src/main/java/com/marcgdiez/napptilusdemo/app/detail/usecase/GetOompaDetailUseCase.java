@@ -1,21 +1,20 @@
-package com.marcgdiez.napptilusdemo.app.list.usecase;
+package com.marcgdiez.napptilusdemo.app.detail.usecase;
 
 import com.marcgdiez.napptilusdemo.app.list.exception.OompaLoompasNotFoundException;
 import com.marcgdiez.napptilusdemo.core.executor.MainThread;
 import com.marcgdiez.napptilusdemo.core.interactor.Interactor;
 import com.marcgdiez.napptilusdemo.data.oompaloompa.repository.OompaLoompaRepository;
-import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;
+import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
 import java.util.concurrent.Executor;
 import javax.inject.Inject;
 import rx.Observable;
 import rx.Subscriber;
 
-public class GetOompasLoompasUseCase extends Interactor<OompaLoompaPage> {
-
+public class GetOompaDetailUseCase extends Interactor<OompaLoompa> {
   private final OompaLoompaRepository oompaLoompaRepository;
-  private int page;
+  private int id;
 
-  @Inject public GetOompasLoompasUseCase(Executor executor, MainThread mainThread,
+  @Inject public GetOompaDetailUseCase(Executor executor, MainThread mainThread,
       OompaLoompaRepository oompaLoompaRepository) {
     super(executor, mainThread);
 
@@ -26,13 +25,13 @@ public class GetOompasLoompasUseCase extends Interactor<OompaLoompaPage> {
     this.oompaLoompaRepository = oompaLoompaRepository;
   }
 
-  public void execute(int page, Subscriber<OompaLoompaPage> subscriber) {
-    this.page = page;
+  public void execute(int id, Subscriber<OompaLoompa> subscriber) {
+    this.id = id;
     super.execute(subscriber);
   }
 
-  @Override protected Observable<OompaLoompaPage> buildObservable() {
-    return oompaLoompaRepository.getOompaLoompas(page)
+  @Override protected Observable<OompaLoompa> buildObservable() {
+    return oompaLoompaRepository.getOompaLoompa(id)
         .switchIfEmpty(Observable.error(new OompaLoompasNotFoundException()));
   }
 }
