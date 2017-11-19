@@ -57,6 +57,10 @@ public class OompaLoompaRepositoryImpl implements OompaLoompaRepository {
     return dataStore.getOompaLoompasByQuery(query);
   }
 
+  @Override public Observable<List<OompaLoompa>> getOompaLoompasByGender(String gender) {
+    return dataStore.getOompaLoompasByGender(gender);
+  }
+
   private void persistOompasDetail(OompaLoompa oompaLoompa) {
     dataStore.persistOompa(oompaLoompa);
   }

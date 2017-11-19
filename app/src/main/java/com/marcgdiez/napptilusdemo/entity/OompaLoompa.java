@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class OompaLoompa implements Parcelable {
+  public static final String MALE = "M";
+  public static final String FEMALE = "F";
+
   private int id;
   private final String name;
   private final String gender;

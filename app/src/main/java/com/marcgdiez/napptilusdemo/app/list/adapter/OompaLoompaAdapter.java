@@ -23,7 +23,6 @@ public class OompaLoompaAdapter
 
   private List<OompaLoompa> items;
   private OnOompaSelectedListener listener;
-  private final String FEMALE = "F";
 
   @Inject public OompaLoompaAdapter() {
     items = new ArrayList<>();
@@ -56,8 +55,8 @@ public class OompaLoompaAdapter
         .error(R.mipmap.napptilus)
         .into(holder.image);
     holder.profession.setText(oompaLoompa.getProfession());
-    int drawable =
-        oompaLoompa.getGender().equals(FEMALE) ? R.drawable.gender_female : R.drawable.gender_male;
+    int drawable = oompaLoompa.getGender().equals(OompaLoompa.FEMALE) ? R.drawable.gender_female
+        : R.drawable.gender_male;
     holder.gender.setImageDrawable(context.getResources().getDrawable(drawable));
 
     ViewCompat.setTransitionName(holder.image, oompaLoompa.getName());

@@ -7,7 +7,8 @@ import io.realm.annotations.RealmClass;
 @RealmClass public class OompaLoompaVo extends RealmObject {
   public static final String PRIMARY_KEY = "id";
   public static final String NAME = "name";
-  
+  public static final String GENDER = "gender";
+
   @PrimaryKey private int id;
   private String name;
   private String gender;

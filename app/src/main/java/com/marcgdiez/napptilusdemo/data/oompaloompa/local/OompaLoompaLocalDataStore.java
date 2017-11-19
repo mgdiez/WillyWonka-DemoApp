@@ -51,4 +51,10 @@ public class OompaLoompaLocalDataStore extends CommonLocalDataStore
         .contains(OompaLoompaVo.NAME, query, Case.INSENSITIVE)
         .findAll()).filter(result -> result != null).map(voMapper::toEntity);
   }
+
+  @Override public Observable<List<OompaLoompa>> getOompaLoompasByGender(String gender) {
+    return RealmObservable.from(realm -> realm.where(OompaLoompaVo.class)
+        .equalTo(OompaLoompaVo.GENDER, gender, Case.INSENSITIVE)
+        .findAll()).filter(result -> result != null).map(voMapper::toEntity);
+  }
 }

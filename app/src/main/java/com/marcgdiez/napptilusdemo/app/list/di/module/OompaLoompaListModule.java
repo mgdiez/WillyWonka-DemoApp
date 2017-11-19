@@ -1,6 +1,7 @@
 package com.marcgdiez.napptilusdemo.app.list.di.module;
 
 import com.marcgdiez.napptilusdemo.app.list.presenter.OompaLoompaListPresenter;
+import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompaLoompasByGenderUseCase;
 import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompaLoompasByQueryUseCase;
 import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.app.story.OompaLoompasStoryController;
@@ -26,12 +27,20 @@ import javax.inject.Named;
     return getOompaLoompasByQueryUseCase;
   }
 
+  @Provides @PerFragment @Named("getOompaLoompasByGenderUseCase")
+  public Interactor<List<OompaLoompa>> provideGetOompaLoompasByGenderUseCase(
+      GetOompaLoompasByGenderUseCase getOompaLoompasByGenderUseCase) {
+    return getOompaLoompasByGenderUseCase;
+  }
+
   @Provides @PerFragment public OompaLoompaListPresenter providePresenter(
       @Named("getOompasLoompasUseCase") Interactor<OompaLoompaPage> getOompasLoompasUseCase,
       @Named("getOompaLoompasByQueryUseCase")
           Interactor<List<OompaLoompa>> getOompaLoompasByQueryUseCase,
+      @Named("getOompaLoompasByGenderUseCase")
+          Interactor<List<OompaLoompa>> getOompaLoompasByGenderUseCase,
       OompaLoompasStoryController oompaLoompasStoryController) {
     return new OompaLoompaListPresenter(getOompasLoompasUseCase, getOompaLoompasByQueryUseCase,
-        oompaLoompasStoryController);
+        getOompaLoompasByGenderUseCase, oompaLoompasStoryController);
   }
 }
