@@ -1,7 +1,11 @@
 package com.marcgdiez.napptilusdemo.app.detail.presenter;
 
+import android.content.Intent;
+import android.net.Uri;
+import com.marcgdiez.napptilusdemo.R;
 import com.marcgdiez.napptilusdemo.app.detail.usecase.GetOompaDetailUseCase;
 import com.marcgdiez.napptilusdemo.app.detail.view.OompaDetailView;
+import com.marcgdiez.napptilusdemo.app.story.OompaLoompasState;
 import com.marcgdiez.napptilusdemo.app.story.OompaLoompasStoryController;
 import com.marcgdiez.napptilusdemo.core.interactor.Interactor;
 import com.marcgdiez.napptilusdemo.core.presenter.Presenter;
@@ -28,6 +32,8 @@ public class OompaLoompaDetailPresenter extends Presenter<OompaDetailView> {
       getOompasLoompasUseCase.execute(selectedOompa.getId(), new DefaultSubscriber<OompaLoompa>() {
         @Override public void onNext(OompaLoompa oompaLoompa) {
           super.onNext(oompaLoompa);
+          OompaLoompasState storyState = oompaLoompasStoryController.getStoryState();
+          storyState.setSelectedOompa(oompaLoompa);
           showOompa(oompaLoompa);
         }
 
@@ -46,5 +52,16 @@ public class OompaLoompaDetailPresenter extends Presenter<OompaDetailView> {
 
   @Override public void stop() {
     getOompasLoompasUseCase.unsubcribe();
+  }
+
+  public void onEmailButtonClicked() {
+    Intent intent = new Intent(Intent.ACTION_SENDTO);
+    intent.setData(Uri.parse(
+        "mailto:" + oompaLoompasStoryController.getStoryState().getSelectedOompa().getEmail()));
+    intent.putExtra(Intent.EXTRA_SUBJECT,
+        view.getContext().getResources().getString(R.string.email_subject));
+    if (intent.resolveActivity(view.getContext().getPackageManager()) != null) {
+      view.getContext().startActivity(intent);
+    }
   }
 }

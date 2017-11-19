@@ -37,6 +37,7 @@ ext {
 
   dependencies = [support            : "com.android.support:appcompat-v7:${supportVersion}",
                   constraintLayout   : "com.android.support.constraint:constraint-layout:${constraintVersion}",
+                  design             : "com.android.support:design:${supportVersion}",
                   rxJava             : "io.reactivex:rxjava:${rxJavaVersion}",
                   rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}",
                   recyclerView       : "com.android.support:recyclerview-v7:${supportVersion}",

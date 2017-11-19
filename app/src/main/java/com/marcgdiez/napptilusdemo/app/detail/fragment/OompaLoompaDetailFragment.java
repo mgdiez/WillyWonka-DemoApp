@@ -2,13 +2,14 @@ package com.marcgdiez.napptilusdemo.app.detail.fragment;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.transition.TransitionInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
+import butterknife.internal.DebouncingOnClickListener;
 import com.marcgdiez.napptilusdemo.R;
 import com.marcgdiez.napptilusdemo.app.activity.OompaLoompasActivity;
 import com.marcgdiez.napptilusdemo.app.detail.di.component.OompaDetailComponent;
@@ -35,6 +36,7 @@ public class OompaLoompaDetailFragment extends RootFragment implements OompaDeta
   @BindView(R.id.gender) TextView gender;
   @BindView(R.id.email) TextView email;
   @BindView(R.id.description) TextView description;
+  @BindView(R.id.fab) FloatingActionButton emailButton;
 
   private static final String EXTRA_TRANSITION_NAME = "transition_name";
 
@@ -58,6 +60,12 @@ public class OompaLoompaDetailFragment extends RootFragment implements OompaDeta
     if (getActivity() != null) {
       ((OompaLoompasActivity) getActivity()).showArrowToolbar();
     }
+
+    emailButton.setOnClickListener(new DebouncingOnClickListener() {
+      @Override public void doClick(View v) {
+        presenter.onEmailButtonClicked();
+      }
+    });
   }
 
   @Override protected void initializeTransition() {
@@ -117,5 +125,4 @@ public class OompaLoompaDetailFragment extends RootFragment implements OompaDeta
           }
         });
   }
-
 }

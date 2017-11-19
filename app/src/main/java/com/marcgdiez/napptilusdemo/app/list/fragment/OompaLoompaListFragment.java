@@ -132,7 +132,6 @@ public class OompaLoompaListFragment extends RootFragment implements OompaLoompa
   }
 
   @Override public void showProgress() {
-    recyclerView.setVisibility(View.GONE);
     progressBar.setVisibility(View.VISIBLE);
     error.setVisibility(View.GONE);
   }

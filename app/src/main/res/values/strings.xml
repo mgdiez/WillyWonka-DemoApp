@@ -3,4 +3,5 @@
   <string name="error_message">Oops! Something went wrong at Willy Wonka\'s HQ :(</string>
   <string name="search">Search</string>
   <string name="no_results">No results found</string>
+  <string name="email_subject">Napptilus Demo App! :)</string>
 </resources>

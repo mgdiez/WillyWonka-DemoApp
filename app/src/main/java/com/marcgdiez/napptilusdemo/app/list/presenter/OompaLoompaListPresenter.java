@@ -78,6 +78,7 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
 
   public void onBottomReached() {
     if (canRequestMoreOompas() && isNotFiltering()) {
+      view.showProgress();
       getOompaLoompas(storyController.getStoryState().getPage() + 1);
     }
   }
@@ -117,7 +118,7 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
 
   private void updateList() {
     boolean shouldSearch = femaleFilter != maleFilter;
-    if (!shouldSearch) {
+    if (!shouldSearch && storyController.hasState()) {
       view.setNewItems(storyController.getStoryState().getOompaLoompas());
     } else {
       String gender = femaleFilter ? OompaLoompa.FEMALE : OompaLoompa.MALE;

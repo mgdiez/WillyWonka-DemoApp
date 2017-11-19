@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -10,64 +11,91 @@
   <ImageView
       android:id="@+id/image"
       android:layout_width="match_parent"
-      android:layout_height="200dp"
+      android:layout_height="@dimen/detail_image_height"
       android:scaleType="centerCrop"
       tools:ignore="ContentDescription"
       tools:src="@mipmap/napptilus"
       />
 
-  <LinearLayout
+  <android.support.v4.widget.NestedScrollView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_margin="16dp"
-      android:orientation="vertical"
       app:layout_constraintTop_toBottomOf="@+id/image"
+
       >
-
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="23"
-        />
+        android:layout_margin="@dimen/guideline_margin"
+        android:orientation="vertical"
+        >
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Marcy Karadzas"
-        />
+      <TextView
+          android:id="@+id/id"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:visibility="gone"
+          tools:text="23"
+          />
 
-    <TextView
-        android:id="@+id/profession"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Developer"
-        />
+      <TextView
+          android:id="@+id/name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+          android:textStyle="bold"
+          tools:text="Marcy Karadzas"
+          />
 
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Male"
-        />
+      <TextView
+          android:id="@+id/profession"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+          android:textStyle="italic"
+          tools:text="Developer"
+          />
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="mkaradzas1@visualengin.com"
-        />
+      <TextView
+          android:id="@+id/gender"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+          tools:text="Male"
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          />
+
+      <TextView
+          android:id="@+id/email"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+          tools:text="mkaradzas1@visualengin.com"
+          />
+
+      <TextView
+          android:id="@+id/description"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/guideline_margin"
+          android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+          tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
     magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
     ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
     dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
     qui officia deserunt mollit anim id est laborum"
-        />
-  </LinearLayout>
+          />
+    </LinearLayout>
+  </android.support.v4.widget.NestedScrollView>
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/guideline_margin"
+      app:layout="@+id/image"
+      app:layout_constraintBottom_toBottomOf="@+id/root"
+      app:layout_constraintEnd_toEndOf="@+id/root"
+      app:srcCompat="@android:drawable/ic_dialog_email"
+      />
+
 </android.support.constraint.ConstraintLayout>
