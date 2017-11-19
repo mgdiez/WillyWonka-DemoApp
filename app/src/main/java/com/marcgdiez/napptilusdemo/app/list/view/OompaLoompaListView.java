@@ -12,5 +12,9 @@ public interface OompaLoompaListView extends IView {
 
   void hideProgress();
 
-  void showErrorMessage(String errorMessage);
+  void showErrorMessage();
+
+  void setNewItems(List<OompaLoompa> oompaLoompas);
+
+  void showNoResults();
 }

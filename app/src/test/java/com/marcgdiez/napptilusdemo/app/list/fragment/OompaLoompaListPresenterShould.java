@@ -1,10 +1,11 @@
 package com.marcgdiez.napptilusdemo.app.list.fragment;
 
 import com.marcgdiez.napptilusdemo.app.list.presenter.OompaLoompaListPresenter;
+import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompaLoompasByQueryUseCase;
+import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.app.list.view.OompaLoompaListView;
 import com.marcgdiez.napptilusdemo.app.story.OompaLoompasState;
 import com.marcgdiez.napptilusdemo.app.story.OompaLoompasStoryController;
-import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.core.subscriber.DefaultSubscriber;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;
@@ -20,6 +21,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyListOf;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -28,6 +30,7 @@ import static org.mockito.Mockito.when;
 public class OompaLoompaListPresenterShould {
 
   @Mock GetOompasLoompasUseCase mockGetOompasLoompasUseCase;
+  @Mock GetOompaLoompasByQueryUseCase mockGetOompaLoompasByQueryUseCase;
   @Mock OompaLoompasStoryController mockStoryController;
   @Mock OompaLoompaListView mockOompaLoompaListView;
   private OompaLoompaListPresenter presenter;
@@ -35,7 +38,9 @@ public class OompaLoompaListPresenterShould {
   @Before public void setUp() {
     MockitoAnnotations.initMocks(this);
 
-    presenter = new OompaLoompaListPresenter(mockGetOompasLoompasUseCase, mockStoryController);
+    presenter =
+        new OompaLoompaListPresenter(mockGetOompasLoompasUseCase, mockGetOompaLoompasByQueryUseCase,
+            mockStoryController);
 
     presenter.setView(mockOompaLoompaListView);
   }
@@ -106,13 +111,13 @@ public class OompaLoompaListPresenterShould {
     when(mockStoryController.getStoryState()).thenReturn(new OompaLoompasState());
 
     doAnswer(invocation -> {
-      ((Subscriber) invocation.getArguments()[1]).onError(new Throwable("errorMessage"));
+      ((Subscriber) invocation.getArguments()[1]).onError(new Throwable());
       return null;
     }).when(mockGetOompasLoompasUseCase).execute(anyInt(), any(Subscriber.class));
 
     presenter.start();
 
-    verify(mockOompaLoompaListView).showErrorMessage("errorMessage");
+    verify(mockOompaLoompaListView).showErrorMessage();
   }
 
   @Test public void show_data_onNext() {
@@ -128,5 +133,31 @@ public class OompaLoompaListPresenterShould {
     presenter.start();
 
     verify(mockOompaLoompaListView).setItems(any());
+  }
+
+  @Test public void show_data_onNext_query() {
+
+    doAnswer(invocation -> {
+      ((Subscriber) invocation.getArguments()[1]).onNext(new ArrayList<>());
+      return null;
+    }).when(mockGetOompaLoompasByQueryUseCase).execute(anyString(), any(Subscriber.class));
+
+    presenter.start();
+    presenter.onQueryTextChanged("");
+
+    verify(mockOompaLoompaListView).setNewItems(any());
+  }
+
+  @Test public void show_error_feedback_query() {
+
+    doAnswer(invocation -> {
+      ((Subscriber) invocation.getArguments()[1]).onError(new Throwable());
+      return null;
+    }).when(mockGetOompaLoompasByQueryUseCase).execute(anyString(), any(Subscriber.class));
+
+    presenter.start();
+    presenter.onQueryTextChanged("");
+
+    verify(mockOompaLoompaListView).showNoResults();
   }
 }

@@ -5,6 +5,7 @@ import com.marcgdiez.napptilusdemo.data.oompaloompa.vo.OompaLoompaVo;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;
 import io.realm.RealmList;
+import io.realm.RealmResults;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -80,5 +81,16 @@ public class VoMapper {
       vo.setDescription(oompaLoompa.getDescription());
     }
     return vo;
+  }
+
+  public List<OompaLoompa> toEntity(RealmResults<OompaLoompaVo> oompaLoompaVos) {
+    List<OompaLoompa> oompaLoompas = null;
+    if (oompaLoompaVos != null && !oompaLoompaVos.isEmpty()) {
+      oompaLoompas = new ArrayList<>();
+      for (OompaLoompaVo oompaLoompaVo : oompaLoompaVos) {
+        oompaLoompas.add(toEntity(oompaLoompaVo));
+      }
+    }
+    return oompaLoompas;
   }
 }

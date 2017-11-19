@@ -72,6 +72,12 @@ public class OompaLoompaAdapter
     return items != null ? items.size() : 0;
   }
 
+  public void setNewItems(List<OompaLoompa> newItems) {
+    items.clear();
+    items.addAll(newItems);
+    notifyDataSetChanged();
+  }
+
   static class OompaLoompaViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.backgroundImage) ImageView image;

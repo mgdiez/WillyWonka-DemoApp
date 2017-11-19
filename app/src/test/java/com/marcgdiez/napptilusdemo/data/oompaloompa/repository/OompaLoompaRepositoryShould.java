@@ -125,6 +125,12 @@ public class OompaLoompaRepositoryShould {
     verify(mockDataStore).persistOompa(fakeOompaLompa);
   }
 
+  @Test public void call_data_store_on_query() {
+    oompaLoompaRepository.getOompaLoompasByQuery("query");
+
+    verify(mockDataStore).getOompaLoompasByQuery("query");
+  }
+
   private OompaLoompa createFakeOompa() {
     return new OompaLoompa(1, "Marc", "M", "image", "Developer", "marcgdiez@gmail.com",
         "Descriptions");

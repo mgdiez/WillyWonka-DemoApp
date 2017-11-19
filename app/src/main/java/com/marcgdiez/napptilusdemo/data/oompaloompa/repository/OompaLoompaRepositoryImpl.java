@@ -5,6 +5,7 @@ import com.marcgdiez.napptilusdemo.data.oompaloompa.local.OompaLoompaDataStore;
 import com.marcgdiez.napptilusdemo.data.oompaloompa.network.OompaLoompaDataSource;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;
+import java.util.List;
 import javax.inject.Inject;
 import rx.Observable;
 
@@ -50,6 +51,10 @@ public class OompaLoompaRepositoryImpl implements OompaLoompaRepository {
         return Observable.just(oompaLoompa);
       }
     });
+  }
+
+  @Override public Observable<List<OompaLoompa>> getOompaLoompasByQuery(String query) {
+    return dataStore.getOompaLoompasByQuery(query);
   }
 
   private void persistOompasDetail(OompaLoompa oompaLoompa) {

@@ -2,6 +2,7 @@ package com.marcgdiez.napptilusdemo.app.list.presenter;
 
 import android.support.annotation.VisibleForTesting;
 import android.widget.ImageView;
+import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompaLoompasByQueryUseCase;
 import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.app.list.view.OompaLoompaListView;
 import com.marcgdiez.napptilusdemo.app.story.OompaLoompasState;
@@ -18,11 +19,15 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
 
   private final OompaLoompasStoryController storyController;
   private final GetOompasLoompasUseCase getOompaLoompasUseCase;
+  private final GetOompaLoompasByQueryUseCase getOompaLoompasByQueryUseCase;
 
   @Inject public OompaLoompaListPresenter(Interactor<OompaLoompaPage> getOompaLoompasUseCase,
+      Interactor<List<OompaLoompa>> getOompaLoompasByQueryUseCase,
       OompaLoompasStoryController storyController) {
 
     this.getOompaLoompasUseCase = (GetOompasLoompasUseCase) getOompaLoompasUseCase;
+    this.getOompaLoompasByQueryUseCase =
+        (GetOompaLoompasByQueryUseCase) getOompaLoompasByQueryUseCase;
     this.storyController = storyController;
   }
 
@@ -52,7 +57,7 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
       @Override protected void onError(String errorMessage) {
         List<OompaLoompa> oompaLoompas = storyController.getStoryState().getOompaLoompas();
         if (oompaLoompas == null || oompaLoompas.isEmpty()) {
-          view.showErrorMessage(errorMessage);
+          view.showErrorMessage();
         }
       }
     });
@@ -60,6 +65,7 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
 
   @Override public void stop() {
     getOompaLoompasUseCase.unsubcribe();
+    getOompaLoompasByQueryUseCase.unsubcribe();
   }
 
   public void onBottomReached() {
@@ -76,5 +82,18 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
   public void onOompaSelected(OompaLoompa oompaLoompa, ImageView image) {
     storyController.getStoryState().setSelectedOompa(oompaLoompa);
     storyController.navigateToDetail(image);
+  }
+
+  public void onQueryTextChanged(String query) {
+    getOompaLoompasByQueryUseCase.execute(query, new DefaultSubscriber<List<OompaLoompa>>() {
+      @Override public void onNext(List<OompaLoompa> oompaLoompas) {
+        super.onNext(oompaLoompas);
+        view.setNewItems(oompaLoompas);
+      }
+
+      @Override protected void onError(String errorMessage) {
+        view.showNoResults();
+      }
+    });
   }
 }

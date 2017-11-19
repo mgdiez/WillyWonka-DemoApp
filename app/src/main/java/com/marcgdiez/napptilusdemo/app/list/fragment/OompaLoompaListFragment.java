@@ -1,9 +1,14 @@
 package com.marcgdiez.napptilusdemo.app.list.fragment;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -44,7 +49,28 @@ public class OompaLoompaListFragment extends RootFragment implements OompaLoompa
     return R.layout.fragment_oompas_list;
   }
 
+  @Override public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    super.onCreateOptionsMenu(menu, inflater);
+    FragmentActivity activity = getActivity();
+    if (activity != null) {
+      activity.getMenuInflater().inflate(R.menu.menu, menu);
+      MenuItem item = menu.findItem(R.id.search);
+      SearchView searchView = (SearchView) item.getActionView();
+      searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        @Override public boolean onQueryTextSubmit(String query) {
+          return false;
+        }
+
+        @Override public boolean onQueryTextChange(String newText) {
+          presenter.onQueryTextChanged(newText);
+          return true;
+        }
+      });
+    }
+  }
+
   @Override protected void initializeView(View view) {
+    setHasOptionsMenu(true);
     if (getActivity() != null) {
       ((OompaLoompasActivity) getActivity()).hideArrowToolbar();
     }
@@ -87,6 +113,7 @@ public class OompaLoompaListFragment extends RootFragment implements OompaLoompa
 
   @Override public void setItems(List<OompaLoompa> oompaLoompas) {
     hideProgress();
+    error.setVisibility(View.GONE);
     adapter.setItems(oompaLoompas);
   }
 
@@ -102,9 +129,23 @@ public class OompaLoompaListFragment extends RootFragment implements OompaLoompa
     error.setVisibility(View.GONE);
   }
 
-  @Override public void showErrorMessage(String errorMessage) {
+  @Override public void showErrorMessage() {
     recyclerView.setVisibility(View.GONE);
     progressBar.setVisibility(View.GONE);
     error.setVisibility(View.VISIBLE);
+    error.setText(getResources().getString(R.string.error_message));
+  }
+
+  @Override public void setNewItems(List<OompaLoompa> oompaLoompas) {
+    hideProgress();
+    error.setVisibility(View.GONE);
+    adapter.setNewItems(oompaLoompas);
+  }
+
+  @Override public void showNoResults() {
+    recyclerView.setVisibility(View.GONE);
+    progressBar.setVisibility(View.GONE);
+    error.setVisibility(View.VISIBLE);
+    error.setText(getResources().getString(R.string.no_results));
   }
 }

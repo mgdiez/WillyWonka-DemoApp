@@ -2,6 +2,7 @@ package com.marcgdiez.napptilusdemo.data.oompaloompa.local;
 
 import com.marcgdiez.napptilusdemo.entity.OompaLoompa;
 import com.marcgdiez.napptilusdemo.entity.OompaLoompaPage;
+import java.util.List;
 import rx.Observable;
 
 public interface OompaLoompaDataStore {
@@ -12,4 +13,6 @@ public interface OompaLoompaDataStore {
   Observable<OompaLoompa> getOompaLoompaDetail(int id);
 
   void persistOompa(OompaLoompa oompaLoompa);
+
+  Observable<List<OompaLoompa>> getOompaLoompasByQuery(String query);
 }
