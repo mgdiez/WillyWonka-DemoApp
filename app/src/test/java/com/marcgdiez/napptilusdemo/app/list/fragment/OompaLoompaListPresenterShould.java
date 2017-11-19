@@ -1,6 +1,7 @@
 package com.marcgdiez.napptilusdemo.app.list.fragment;
 
 import com.marcgdiez.napptilusdemo.app.list.presenter.OompaLoompaListPresenter;
+import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompaLoompasByGenderUseCase;
 import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompaLoompasByQueryUseCase;
 import com.marcgdiez.napptilusdemo.app.list.usecase.GetOompasLoompasUseCase;
 import com.marcgdiez.napptilusdemo.app.list.view.OompaLoompaListView;
@@ -31,6 +32,7 @@ public class OompaLoompaListPresenterShould {
 
   @Mock GetOompasLoompasUseCase mockGetOompasLoompasUseCase;
   @Mock GetOompaLoompasByQueryUseCase mockGetOompaLoompasByQueryUseCase;
+  @Mock GetOompaLoompasByGenderUseCase moGetOompaLoompasByGenderUseCase;
   @Mock OompaLoompasStoryController mockStoryController;
   @Mock OompaLoompaListView mockOompaLoompaListView;
   private OompaLoompaListPresenter presenter;
@@ -40,7 +42,7 @@ public class OompaLoompaListPresenterShould {
 
     presenter =
         new OompaLoompaListPresenter(mockGetOompasLoompasUseCase, mockGetOompaLoompasByQueryUseCase,
-            mockStoryController);
+            moGetOompaLoompasByGenderUseCase, mockStoryController);
 
     presenter.setView(mockOompaLoompaListView);
   }

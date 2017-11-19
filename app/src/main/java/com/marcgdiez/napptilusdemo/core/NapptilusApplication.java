@@ -19,7 +19,7 @@ public class NapptilusApplication extends Application
     initializeRealm();
   }
 
-  private void initializeRealm() {
+  protected void initializeRealm() {
     Realm.init(this);
 
     RealmConfiguration config =

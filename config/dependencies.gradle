@@ -30,8 +30,10 @@ ext {
   jUnitVersion = '4.12'
   testRunnerVersion = '1.0.1'
   espressoVersion = '3.0.1'
+  robolectricVersion = '3.3.2'
   mockitoVersion = '1.9.5'
   mockitoAndroidVersion = '2.6.2'
+  powermockVersion = '1.6.4'
 
   dependencies = [support            : "com.android.support:appcompat-v7:${supportVersion}",
                   constraintLayout   : "com.android.support.constraint:constraint-layout:${constraintVersion}",
@@ -50,9 +52,15 @@ ext {
                   butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
                   gson               : "com.google.code.gson:gson:${gsonVersion}"]
 
-  testDependencies = [junit         : "junit:junit:${jUnitVersion}",
-                      testRunner    : "com.android.support.test:runner:${testRunnerVersion}",
-                      espresso      : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-                      mockito       : "org.mockito:mockito-core:${mockitoVersion}",
-                      mockitoAndroid: "org.mockito:mockito-android:${mockitoAndroidVersion}"]
+  testDependencies = [junit                : "junit:junit:${jUnitVersion}",
+                      testRunner           : "com.android.support.test:runner:${testRunnerVersion}",
+                      espresso             : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+                      robolectric          : "org.robolectric:robolectric:${robolectricVersion}",
+                      robolectricShadows   : "org.robolectric:shadows-support-v4:${robolectricVersion}",
+                      powermockjUnit       : "org.powermock:powermock-module-junit4:${powermockVersion}",
+                      powermockjUnitRule   : "org.powermock:powermock-module-junit4-rule:${powermockVersion}",
+                      powermockMockito     : "org.powermock:powermock-api-mockito:${powermockVersion}",
+                      powermockClassLoading: "org.powermock:powermock-classloading-xstream:${powermockVersion}",
+                      mockito              : "org.mockito:mockito-core:${mockitoVersion}",
+                      mockitoAndroid       : "org.mockito:mockito-android:${mockitoAndroidVersion}"]
 }

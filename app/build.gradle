@@ -52,9 +52,14 @@ dependencies {
 
   implementation dependencies.butterKnife
   annotationProcessor dependencies.butterKnifeCompiler
-
+  testImplementation testDependencies.robolectric
+  testImplementation testDependencies.robolectricShadows
   androidTestImplementation testDependencies.testRunner
   androidTestImplementation testDependencies.espresso
   testImplementation testDependencies.junit
   testImplementation testDependencies.mockito
+  testImplementation testDependencies.powermockjUnit
+  testImplementation testDependencies.powermockjUnitRule
+  testImplementation testDependencies.powermockMockito
+  testImplementation testDependencies.powermockClassLoading
 }
