@@ -162,4 +162,11 @@ public class OompaLoompaListPresenterShould {
 
     verify(mockOompaLoompaListView).showNoResults();
   }
+
+  @Test public void get_oompas_from_state_on_filter() {
+    presenter.start();
+    presenter.onFemaleChecked();
+
+    verify(moGetOompaLoompasByGenderUseCase).execute(anyString(), any(Subscriber.class));
+  }
 }

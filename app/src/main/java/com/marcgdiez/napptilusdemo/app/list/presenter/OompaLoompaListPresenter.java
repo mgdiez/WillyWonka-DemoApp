@@ -120,12 +120,7 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
     if (!shouldSearch) {
       view.setNewItems(storyController.getStoryState().getOompaLoompas());
     } else {
-      String gender;
-      if (femaleFilter) {
-        gender = OompaLoompa.FEMALE;
-      } else {
-        gender = OompaLoompa.MALE;
-      }
+      String gender = femaleFilter ? OompaLoompa.FEMALE : OompaLoompa.MALE;
       getOompaLoompasByGenderUseCase.execute(gender, new DefaultSubscriber<List<OompaLoompa>>() {
         @Override public void onNext(List<OompaLoompa> oompaLoompas) {
           super.onNext(oompaLoompas);
@@ -133,7 +128,7 @@ public class OompaLoompaListPresenter extends Presenter<OompaLoompaListView> {
         }
 
         @Override protected void onError(String errorMessage) {
-
+          //Do nothing here
         }
       });
     }

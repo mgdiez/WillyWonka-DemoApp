@@ -11,10 +11,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-/**
- * Created by Marc on 18/11/2017.
- */
-
 public abstract class BaseStoryController<S extends StoryState> {
 
   @VisibleForTesting public static final String STORY_STATE_KEY = "STORY_STATE_KEY";
