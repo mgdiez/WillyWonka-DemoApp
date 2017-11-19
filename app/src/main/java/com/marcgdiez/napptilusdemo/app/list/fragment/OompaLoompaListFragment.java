@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.marcgdiez.napptilusdemo.R;
+import com.marcgdiez.napptilusdemo.app.activity.OompaLoompasActivity;
 import com.marcgdiez.napptilusdemo.app.di.component.OompaLoompasComponent;
 import com.marcgdiez.napptilusdemo.app.list.adapter.OompaLoompaAdapter;
 import com.marcgdiez.napptilusdemo.app.list.di.component.OompaLoompaListComponent;
@@ -44,6 +45,10 @@ public class OompaLoompaListFragment extends RootFragment implements OompaLoompa
   }
 
   @Override protected void initializeView(View view) {
+    if (getActivity() != null) {
+      ((OompaLoompasActivity) getActivity()).hideArrowToolbar();
+    }
+
     adapter.addOnOompaSelectedListener(
         (oompaLoompa, image) -> presenter.onOompaSelected(oompaLoompa, image));
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -4,11 +4,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.transition.TransitionInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.marcgdiez.napptilusdemo.R;
+import com.marcgdiez.napptilusdemo.app.activity.OompaLoompasActivity;
 import com.marcgdiez.napptilusdemo.app.detail.di.component.OompaDetailComponent;
 import com.marcgdiez.napptilusdemo.app.detail.di.module.OompaDetailModule;
 import com.marcgdiez.napptilusdemo.app.detail.presenter.OompaLoompaDetailPresenter;
@@ -53,6 +55,9 @@ public class OompaLoompaDetailFragment extends RootFragment implements OompaDeta
   }
 
   @Override protected void initializeView(View view) {
+    if (getActivity() != null) {
+      ((OompaLoompasActivity) getActivity()).showArrowToolbar();
+    }
   }
 
   @Override protected void initializeTransition() {
@@ -112,4 +117,5 @@ public class OompaLoompaDetailFragment extends RootFragment implements OompaDeta
           }
         });
   }
+
 }
