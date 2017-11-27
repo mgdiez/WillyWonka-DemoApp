@@ -1,4 +1,4 @@
-# Napptilus Demo for Willy Wonka's Chocolate Factory
+# Willy Wonka's Chocolate Factory
 ![a](https://media.licdn.com/media/AAEAAQAAAAAAAAduAAAAJDQzNWQ5ZWJjLTJkNDQtNDljYy05OWM5LTFhMTFmZjM2MTllMg.png)
 
 ## Dependencies used:
@@ -15,7 +15,7 @@
 * Mockito -> Mock/Stub/Spy classes at test files. (https://github.com/mockito/mockito)
 * PowerMockito -> Supress initialization at test clases for Realm, for instance. (https://github.com/powermock/powermock)
 
-## Funcionalities implemented:
+## Functionalities implemented:
 
 * Pagination
 * Lazy Load
