@@ -1,5 +1,4 @@
 # Willy Wonka's Chocolate Factory
-![a](https://media.licdn.com/media/AAEAAQAAAAAAAAduAAAAJDQzNWQ5ZWJjLTJkNDQtNDljYy05OWM5LTFhMTFmZjM2MTllMg.png)
 
 ## Dependencies used:
 
